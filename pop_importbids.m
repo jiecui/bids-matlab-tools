@@ -178,6 +178,11 @@ for iSubject = 2:size(bids.participants,1)
                     EEG = pop_biosig( eegFileRaw );
                 case '.eeg',
                     EEG = pop_loadbva( eegFileRaw );
+                case '.mefd' % MEF 3.0 raw data
+                    mef_ver = bids.dataset_description.MEFVersion;
+                    pw = bids.dataset_description.Password;
+                    EEG = eeg_emptyset;
+                    EEG = pop_mefimport(EEG, mef_ver, eegFileRaw, [], [], 'uutc', pw);
                 otherwise
                     error(sprintf('No EEG data found for subject %s', bids.participants{iSubject,1}));
             end
