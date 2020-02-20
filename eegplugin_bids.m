@@ -9,9 +9,17 @@
 %   trystrs    - [struct] "try" strings for menu callbacks.
 %   catchstrs  - [struct] "catch" strings for menu callbacks.
 
+% Copyright 2020 Richard J. Cui. adapted: Thu 02/20/2020  3:29:01.404 PM
+% $Revision: 0.1 $  $Date: Thu 02/20/2020  3:29:01.404 PM $
+%
+% 1026 Rocky Creek Dr NE
+% Rochester, MN 55906, USA
+%
+% Email: richard.cui@utoronto.ca
+
 function vers = eegplugin_bids(fig, trystrs, catchstrs)
 
-    vers = '2.0';
+    vers = '2.1';
     if nargin < 3
         error('eegplugin_bids requires 3 arguments');
     end
@@ -31,7 +39,7 @@ function vers = eegplugin_bids(fig, trystrs, catchstrs)
     
     % menu callbacks
     % --------------
-    comcnt1 = [ trystrs.no_check '[STUDYTMP, ALLEEGTMP, ~, LASTCOM] = pop_importbids; '  catchstrs.load_study ];
+    comcnt1 = [ trystrs.no_check '[STUDYTMP, ALLEEGTMP, ~, LASTCOM] = pop_importbids(EEG); '  catchstrs.load_study ];
     comcnt2 = [ trystrs.no_check 'pop_exportbids(STUDY);' catchstrs.add_to_hist ];
                 
     % create menus
@@ -39,3 +47,5 @@ function vers = eegplugin_bids(fig, trystrs, catchstrs)
     uimenu( menui1, 'label', 'From BIDS folder structure', 'separator', 'on', 'callback', comcnt1);
     uimenu( menui2, 'label', 'To BIDS folder structure', 'separator', 'on', 'callback', comcnt2, 'userdata', 'startup:off;study:on');
     set(menui2, 'userdata', 'startup:off;study:on');
+
+% [EOF]

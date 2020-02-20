@@ -1,7 +1,7 @@
 % pop_importbids() - Import BIDS format folder structure into an EEGLAB
 %                    study.
 % Usage:
-%           >> [STUDY ALLEEG] = pop_importbids(bidsfolder);
+%           >> [STUDY ALLEEG] = pop_importbids(EEG, bidsfolder);
 % Inputs:
 %   bidsfolder - a loaded epoched EEG dataset structure.
 %
@@ -26,9 +26,17 @@
 % along with this program; if not, write to the Free Software
 % Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-function [STUDY, ALLEEG, bids, commands] = pop_importbids(bidsFolder, varargin)
+% Copyright 2020 Richard J. Cui. adapted: Thu 02/20/2020  3:29:01.404 PM
+% $Revision: 0.1 $  $Date: Thu 02/20/2020  3:29:01.404 PM $
+%
+% 1026 Rocky Creek Dr NE
+% Rochester, MN 55906, USA
+%
+% Email: richard.cui@utoronto.ca
 
-if nargin < 1
+function [STUDY, ALLEEG, bids, commands] = pop_importbids(EEG, bidsFolder, varargin)
+
+if nargin < 2
     bidsFolder = uigetdir('Pick a BIDS folder');
     if isequal(bidsFolder,0), return; end
     
@@ -181,7 +189,7 @@ for iSubject = 2:size(bids.participants,1)
                 case '.mefd' % MEF 3.0 raw data
                     mef_ver = bids.dataset_description.MEFVersion;
                     pw = bids.dataset_description.Password;
-                    EEG = eeg_emptyset;
+                    % EEG = eeg_emptyset;
                     EEG = pop_mefimport(EEG, mef_ver, eegFileRaw, [], [], 'uutc', pw);
                 otherwise
                     error(sprintf('No EEG data found for subject %s', bids.participants{iSubject,1}));
@@ -319,3 +327,5 @@ for iCol = 1:size(res,2)
         end
     end
 end
+
+% [EOF]
