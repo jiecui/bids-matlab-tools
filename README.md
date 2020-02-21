@@ -1,8 +1,6 @@
 Import BIDS-MEF into EEGLab bids-matlab-tools (Ver 2.1)
 =======================================================
 
-_Caution: This version is under development, which may not be stable._
-
 This is an EEGLab plugin to import Brain Imaging Data Structure (BIDS) formatted Multiscale Electrophysiology File (MEF) data into EEGLab, which is developed based on [sccn/bids-matlab-tools](https://github.com/sccn/bids-matlab-tools).
 
 This repository contains a collection of function to import and export BIDS-formatted experiments.
